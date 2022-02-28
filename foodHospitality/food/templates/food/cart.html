@@ -1,0 +1,48 @@
+{% extends 'food/base.html' %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% block start %}
+<h3 style="color: #E83A59;font-family: 'Poppins',sans-serif;text-align: center;margin-top: 40px;text-decoration: underline;">Your Orders</h3>
+<div style="display:block;text-align: end; padding: 0px 20px;" class="price">
+  <h4>Total Price : ₹ {{total_price}} </h4>
+  <button class="button">
+    <a href="#">
+      Proceed 
+    </a>
+  </button>
+</div>
+
+<div id="all" class="card-container">
+    {% for order in orders.all %}
+      <div class="card" style="width: 80% !important; display: flex;margin: 50px;">
+        <div class="card-body-left">
+          <img class="card-img-top" src="../media/{{order.food__image}}" alt="{{order.hotel__name}}"/>
+        </div>
+              <div class="card-body">
+                <h5 class="card-title">{{order.food__name}}</h5>
+                <p class="card-text1">Quantity : {{order.quantity}}</p>
+                <p class="card-text1">Price: {{ order.food__price }} </p>
+                <p class="card-text1">Address: {{ order.address }} </p>
+                <p class="card-text1">Status :<span style="background-color: #2B8D12; color: white;"> Successfull</span></p>
+                <p class="card-text1">From : {{ order.ordered_on|date:"D d M Y" }}</p>
+              </div>
+              <div style="    margin-left: auto;
+              margin-top: auto;
+              padding: 20px;">
+                 <button style="background-color: green;
+                                color: white;
+                                padding: 5px 10px;
+                                border-radius: 5px;
+                                border: none;">
+                      <a href="{% url 'updateorder' order.id %}" style="text-decoration: none; color: white;">Update</a>
+                  </button>
+                  <button class="button">
+                      <a href="{% url 'deleteorder' order.id %}">
+                        Delete
+                      </a>
+                    </button>
+              </div>
+          </div>
+    {% endfor %}
+</div>
+{% endblock start %}
