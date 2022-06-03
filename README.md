@@ -1,1 +1,1 @@
-# SDP2-Food-and-Hospitality
+# Food-and-Hospitality
